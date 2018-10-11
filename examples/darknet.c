@@ -397,6 +397,9 @@ void visualize(char *cfgfile, char *weightfile)
     visualize_network(net);
 }
 
+extern void test_detector_roseek(char *datacfg, char *cfgfile, char *weightfile, float thresh, float hier_thresh, int fullscreen);
+
+
 int main(int argc, char **argv)
 {
     //test_resize("data/bad.jpg");
@@ -495,6 +498,12 @@ int main(int argc, char **argv)
         mkimg(argv[2], argv[3], atoi(argv[4]), atoi(argv[5]), atoi(argv[6]), argv[7]);
     } else if (0 == strcmp(argv[1], "imtest")){
         test_resize(argv[2]);
+    } else if (0 == strcmp(argv[1], "rs")){
+        float thresh = .5;
+        //char *filename = (argc > 4) ? argv[4]: 0;
+        //char *outfile = find_char_arg(argc, argv, "-out", 0);
+        int fullscreen = 0;
+        test_detector_roseek("cfg/coco.data", "cfg/yolov3-tiny.cfg", "yolov3-tiny.weights", thresh, .5, fullscreen);
     } else {
         fprintf(stderr, "Not an option: %s\n", argv[1]);
     }
