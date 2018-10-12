@@ -1,3 +1,9 @@
+This project is trying to use Yolo3 in ROSEEK Cheetah1 Camera.
+
+Modifying from the Darknet project.
+
+
+
 ![Darknet Logo](http://pjreddie.com/media/files/darknet-black-small.png)
 
 # Darknet #
