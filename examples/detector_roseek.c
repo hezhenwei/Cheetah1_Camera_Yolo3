@@ -2,12 +2,16 @@
 
 #include "CTMainCore.h"
 
+#define TARGET_WIDTH (320)
+#define TARGET_HEIGHT (240)
 image get_roseek_image() {
     
-    int c = 1;
+    int c = 3;
     int i,j,k;
-    int w = 1920;
-    int h = 1080;
+    //int w = 2048;
+    //int h = 1536;
+    int w = TARGET_WIDTH;
+    int h = TARGET_HEIGHT;
 
     image im = make_image(w, h, c);
 
@@ -20,7 +24,8 @@ image get_roseek_image() {
 	}
 	char* pData = (char*)pFrame->pDataBuf;
 
-    for(k = 0; k < c; ++k){
+    //for(k = 0; k < c; ++k){
+	k = 0;
         for(j = 0; j < h; ++j){
             for(i = 0; i < w; ++i){
                 int dst_index = i + w*j + w*h*k;
@@ -28,7 +33,7 @@ image get_roseek_image() {
                 im.data[dst_index] = (float)pData[src_index];
             }
         }
-    }
+    //}
 
     if (pFrame)
     {
@@ -53,6 +58,7 @@ void test_detector_roseek(char *datacfg, char *cfgfile, char *weightfile, float 
 		return;
 	}
 
+	Roseek_ImageAcquisition_SetResolutionEx(CT_RESOLUTION_MODE_ROI, (2048-TARGET_WIDTH)/2, (1536-TARGET_HEIGHT)/2, TARGET_WIDTH, TARGET_HEIGHT);
 	Roseek_CapturingParameters_SetExposureMode(CT_RUNMODE_TRG, CT_EXPOSUREMODE_MANUAL);
 	Roseek_CapturingParameters_SetExposureTime(CT_RUNMODE_TRG, 20000);
 	Roseek_CapturingParameters_SetGain(CT_RUNMODE_TRG, 0);
@@ -73,7 +79,8 @@ void test_detector_roseek(char *datacfg, char *cfgfile, char *weightfile, float 
     float nms=.45;
     while(1){
 	// input is the file name...so need to modify to 
-        image im = load_image_color(input,0,0);
+        //image im = load_image_color(input,0,0);
+		image im = get_roseek_image(input,0,0);
         image sized = letterbox_image(im, net->w, net->h);
         //image sized = resize_image(im, net->w, net->h);
         //image sized2 = resize_max(im, net->w);
