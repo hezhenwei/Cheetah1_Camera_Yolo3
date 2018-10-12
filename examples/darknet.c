@@ -499,11 +499,11 @@ int main(int argc, char **argv)
     } else if (0 == strcmp(argv[1], "imtest")){
         test_resize(argv[2]);
     } else if (0 == strcmp(argv[1], "rs")){
-        float thresh = .5;
+        float thresh = .3;
         //char *filename = (argc > 4) ? argv[4]: 0;
         //char *outfile = find_char_arg(argc, argv, "-out", 0);
         int fullscreen = 0;
-        test_detector_roseek("cfg/coco.data", "cfg/yolov3-tiny.cfg", "yolov3-tiny.weights", thresh, .5, fullscreen);
+        test_detector_roseek("cfg/coco.data", "cfg/yolov3-tiny.cfg", "yolov3-tiny.weights", thresh, .3, fullscreen);
     } else {
         fprintf(stderr, "Not an option: %s\n", argv[1]);
     }
